@@ -1,0 +1,17 @@
+{
+  "board1": {
+    "name": "Cats",
+    "description": "Nothing but the greatest creatures on earth.",
+    "uid": "JnOHEIiUlnZwADx97gOBBQT2p1t2"
+  },
+  "board2": {
+    "name": "Bears",
+    "description": "big and fluffy",
+    "uid": "376FQGiJubTIDDR9cKaCaJx594S2"
+  },
+  "board3": {
+    "name": "Trucks",
+    "description": "A board with lots of trucks",
+    "uid": "JnOHEIiUlnZwADx97gOBBQT2p1t2"
+  }
+}

@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import firebaseConnection from '../helpers/data/connection';
 import Auth from '../components/Auth/auth';
 import MyNavbar from '../components/MyNavbar/myNavbar';
+import BoardsContainer from '../components/BoardsContainer/boardsContainer';
 
 import './App.scss';
 
@@ -38,7 +39,7 @@ class App extends React.Component {
           {/* If they are authenticated, load the board */}
           {/* ?\else show login button */}
           {
-            (authed) ? (<div>You logged in</div>) : (<Auth />)
+            (authed) ? (<BoardsContainer />) : (<Auth />)
           }
       </div>
     );
