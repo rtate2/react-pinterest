@@ -5,6 +5,7 @@ import firebaseConnection from '../helpers/data/connection';
 import Auth from '../components/Auth/auth';
 import MyNavbar from '../components/MyNavbar/myNavbar';
 import BoardsContainer from '../components/BoardsContainer/boardsContainer';
+import SingleBoard from '../components/SingleBoard/singleBoard';
 
 import './App.scss';
 
@@ -13,6 +14,7 @@ firebaseConnection.firebaseApp();
 class App extends React.Component {
   state = {
     authed: false,
+    selectedBoardId: null,
   }
 
   componentDidMount() {
@@ -29,6 +31,21 @@ class App extends React.Component {
     this.removeListener();
   }
 
+  setSingleBoard = (selectedBoardId) => {
+    this.setState({ selectedBoardId });
+  }
+
+  renderView = () => {
+    const { authed, selectedBoardId } = this.state;
+    if (!authed) {
+      return (<Auth />);
+    }
+    if (!selectedBoardId) {
+      return (<BoardsContainer setSingleBoard={this.setSingleBoard} />);
+    }
+    return (<SingleBoard selectedBoardId={selectedBoardId} setSingleBoard={this.setSingleBoard}/>);
+  }
+
   render() {
     const { authed } = this.state;
 
@@ -39,7 +56,7 @@ class App extends React.Component {
           {/* If they are authenticated, load the board */}
           {/* ?\else show login button */}
           {
-            (authed) ? (<BoardsContainer />) : (<Auth />)
+            this.renderView()
           }
       </div>
     );
