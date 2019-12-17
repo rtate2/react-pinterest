@@ -52,12 +52,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <MyNavbar authed= { authed }/>
-          <button className="btn btn-danger">Bootstrap Button</button>
-          {/* If they are authenticated, load the board */}
-          {/* ?\else show login button */}
-          {
-            this.renderView()
-          }
+          { this.renderView() }
       </div>
     );
   }
