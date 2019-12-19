@@ -9,6 +9,7 @@ class BoardForm extends React.Component {
     addBoard: PropTypes.func,
     boardToEdit: boardShape.boardShape,
     editMode: PropTypes.bool,
+    updateBoard: PropTypes.func,
   }
 
   state = {
@@ -23,6 +24,12 @@ class BoardForm extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if ((prevProps.boardToEdit.id !== this.props.boardToEdit.id) && this.props.editMode) {
+      this.setState({ boardName: this.props.boardToEdit.name, boardDescription: this.props.boardToEdit.description });
+    }
+  }
+
   saveBoardEvent = (e) => {
     const { addBoard } = this.props;
 
@@ -34,6 +41,17 @@ class BoardForm extends React.Component {
     };
     addBoard(newBoard);
     this.setState({ boardName: '', boardDescription: '' });
+  }
+
+  updateBoardEvent = (e) => {
+    e.preventDefault();
+    const { updateBoard, boardToEdit } = this.props;
+    const updatedBoard = {
+      name: this.state.boardName,
+      description: this.state.boardDescription,
+      uid: boardToEdit.uid,
+    };
+    updateBoard(boardToEdit.id, updatedBoard);
   }
 
   nameChange = (e) => {
@@ -74,7 +92,7 @@ class BoardForm extends React.Component {
       />
       </div>
       {
-        (editMode) ? (<button className="btn btn-warning" onClick={() => {}}>Update Board</button>)
+        (editMode) ? (<button className="btn btn-warning" onClick={this.updateBoardEvent}>Update Board</button>)
           : (<button className="btn btn-secondary" onClick={this.saveBoardEvent}>Save Board</button>)
       }
 </form>
